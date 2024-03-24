@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>Update ticket</h1>
+<p>
+    <a href="/tickets">Ticket list</a>
+</p>
+<th:block th:if="${message}">
+    <p th:text="${message}"></p>
+</th:block>
+<form th:action="@{/tickets/update}" th:object="${ticket}" method="post">
+    <input th:type="hidden" name="id" th:field="*{id}">
+    <table>
+        <tr>
+            <td>Name ticket:</td>
+            <td><input type="text" th:field="*{name}"/></td>
+        </tr>
+        <tr>
+            <td>Price:</td>
+            <td><input type="text" th:field="*{price}"/></td>
+        </tr>
+        <tr>
+            <td>Account:</td>
+            <td><select th:field="*{account}">
+                <option th:each="acc : ${accounts}" th:value="${acc.getId()}" th:text="${acc.name}"></option>
+            </select><br>
+            </td>
+        </tr>
+        <tr>
+            <td>Movie theater:</td>
+            <td><select th:field="*{movieTheater}">
+                <option th:each="MT : ${movieTheaters}" th:value="${MT.getId()}" th:text="${MT.name}"></option>
+            </select><br>
+            </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td><input type="submit" value="Update ticket"></td>
+        </tr>
+    </table>
+</form>
+</body>
+</html>

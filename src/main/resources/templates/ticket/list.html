@@ -1,0 +1,170 @@
+<!--<!DOCTYPE html>-->
+<!--<html xmlns:th="http://www.thymeleaf.org" lang="en">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <title>Title</title>-->
+<!--</head>-->
+<!--<body>-->
+<!--<a href="/tickets/create">Create new ticket</a>-->
+<!--<h1>Tickets</h1>-->
+<!--<table border="1">-->
+<!--    <tr>-->
+<!--        <th>#</th>-->
+<!--        <th>Name ticket</th>-->
+<!--        <th>Price</th>-->
+<!--        <th>Movie theater</th>-->
+<!--        <th>Name account</th>-->
+<!--        <th>Actions</th>-->
+<!--    </tr>-->
+<!--    <th:block >-->
+<!--        <tr>-->
+<!--           -->
+<!--        </tr>-->
+<!--    </th:block>-->
+<!--</table>-->
+
+<!--</body>-->
+<!--</html>-->
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+        body,html{
+            height: 100%;
+        }
+
+        .header {
+            float: left;
+            height: 10%;
+            width: 20%;
+            background: #1D2659;
+            display: flex;
+            flex-direction: column;
+            /*align-items: center;*/
+            /*justify-content: center;*/
+        }
+
+        .header .icon {
+            height: 100%;
+            width: 30%;
+            margin-left: 15%;
+            background-image: url('https://khothietke.net/wp-content/uploads/2021/03/PNG00345-phim-truong-cuon-phim-png.png');
+            background-size: cover;
+        }
+
+        .nav {
+            float: right;
+            height: 10%;
+            width: 80%;
+            background: #730A26;
+        }
+
+        .menu {
+            float: left;
+            height: 90vh; /* Sử dụng chiều cao là 90% của viewport height */
+            width: 20%;
+            background: #1D2659;
+            display: flex;
+            flex-direction: column;
+            padding: 0; /* Đảm bảo không có padding */
+            border: none; /* Đảm bảo không có border */
+        }
+
+        .menu a {
+            height: 20px;
+            width: 80%; /* Chiều rộng bằng với chiều rộng tối đa của .menu */
+            text-decoration: none;
+            background: #20448C;
+            color: #ffffff;
+            padding: 10px 20px; /* Thêm padding để tạo khoảng cách xung quanh nội dung */
+            margin: 10px; /* Thêm margin để tạo khoảng cách giữa các thẻ <a> */
+        }
+        .menu a:hover {
+            height: 20px;
+            width: 80%; /* Chiều rộng bằng với chiều rộng tối đa của .menu */
+            text-decoration: none;
+            background: #7193D9;
+            padding: 10px 20px; /* Thêm padding để tạo khoảng cách xung quanh nội dung */
+            margin: 10px; /* Thêm margin để tạo khoảng cách giữa các thẻ <a> */
+        }
+
+        .code {
+            float: right;
+            height: 90vh; /* Sử dụng chiều cao là 90% của viewport height */
+            width: 80%;
+            background: #20448C;
+            overflow-x: auto;
+
+        }
+        .code table {
+            width: max-content;
+            width: 90%; /* Ensuring table takes full width */
+        }
+        .code button:hover {
+            /*text-decoration: none;*/
+
+            background: rgba(145, 163, 203, 0.91);
+            color: #ffffff;
+
+        }
+
+
+
+
+    </style>
+</head>
+<body>
+<div class="header">
+    <div class="icon">
+        <H1 style="padding: 10% 70%;color: #0dcaf0">Phim</H1>
+    </div>
+</div>
+<div class="nav"></div>
+<div class="menu">
+    <a href="@{/}" style="margin-top: 50px">1</a>
+    <a href="@{/}">2</a>
+    <a href="@{/}">3</a>
+</div>
+<div class="code"><button style="margin-left: 86%;margin-top: 5%;height: 4%;color: #20448C;width: 9%" onclick="window.location.href=''">Đặt vé +</button>
+
+    <table cellspacing="0" cellpadding="5" style="margin-left: 5%;margin-top: 1%; border-radius: 10px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
+        <thead style="background-color: #f0f0f0;">
+        <tr>
+            <th style="padding: 10px;border-right: 1px solid #20448C;width: 20px">#</th>
+            <th style="padding: 10px;border-right: 1px solid #20448C;">Name ticket</th>
+            <th style="padding: 10px;border-right: 1px solid #20448C;">Price</th>
+            <th style="padding: 10px;border-right: 1px solid #20448C;">Movie theater</th>
+            <th style="padding: 10px;border-right: 1px solid #20448C;">Account</th>
+            <th style="padding: 10px;border-right: 1px solid #20448C;" colspan="2">Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="ticket , tStatus : ${tickets}" style="border-bottom: 1px solid #ccc;" >
+            <td style="padding: 10px;border-right: 1px solid #ccc;color: #ffffff;background: rgb(42,85,171)" th:text="${tStatus.count}" ></td>
+            <td style="padding: 10px;border-right: 1px solid #ccc;color: #ffffff;background: rgb(42,85,171)" > <a th:href="@{'/tickets/' + ${ticket.getId()}}" th:text="${ticket.name}" ></a></td>
+            <td style="padding: 10px;border-right: 1px solid #ccc;color: #ffffff;background: rgb(42,85,171)" th:text="${ticket.price}" ></td>
+            <td style="padding: 10px;border-right: 1px solid #ccc;;color: #ffffff;background: rgb(42,85,171)" th:text="${ticket.movieTheater.name}" ></td>
+            <td style="padding: 10px;border-right: 1px solid #ccc;;color: #ffffff;background: rgb(42,85,171)" th:text="${ticket.account.name}" ></td>
+            <td class="td" style="width: 150px;padding: 10px;color: #ffffff;background: rgb(42,85,171);text-align: center">
+                <a th:href="@{/tickets/update/__${ticket.id}__ }"> <button style=" background: rgb(42,85,171); border: 2px solid rgb(42,85,171);" type="submit" onclick="window.location.href=''">Sửa</button></a>
+            </td>
+            <td class="td" style="width: 150px;padding: 10px;color: #ffffff;background: rgb(42,85,171);text-align: center">
+                <a th:href="@{/tickets/delete/__${ticket.id}__ }"> <button style=" background: rgb(42,85,171); border: 2px solid rgb(42,85,171);" type="submit" onclick="window.location.href=''">Xóa</button></a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <a class="btn btn-primary" th:if="${tickets.hasPrevious()}"
+       th:href="@{/tickets(page=${tickets.number - 1})}">Previous</a>
+    <span th:text="${tickets.number + 1}"></span> | <span th:text="${tickets.totalPages}"></span>
+    <a class="btn btn-primary" th:if="${tickets.hasNext()}"
+       th:href="@{/tickets(page=${tickets.number + 1})}">Next</a>
+</div>
+</body>
+</html>
