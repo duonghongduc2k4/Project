@@ -37,7 +37,7 @@ public class AdminController {
 
     @GetMapping()
     public ModelAndView listCustomers(@PageableDefault(value = 10) Pageable pageable) {
-        ModelAndView modelAndView = new ModelAndView("/ticket/list");
+        ModelAndView modelAndView = new ModelAndView("/ticket/table");
         Page<Ticket> tickets = ticketService.findAll(pageable);
         modelAndView.addObject("tickets", tickets);
         return modelAndView;
